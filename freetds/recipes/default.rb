@@ -9,6 +9,11 @@ package "wget" do
   action :install
 end
 
+execute "ldconfig" do
+  user "root"
+  action :nothing
+end
+
 remote_file "/tmp/#{freetds_tar}" do
   source "#{freetds_url}"
   mode 0644
@@ -18,22 +23,19 @@ end
 execute "tar -xf #{freetds_tar}" do
   cwd "/tmp"
   user "root"
-  not_if "test -d #{freetds_dir}"
+  creates freetds_dir
 end
 
 execute "compile freetds" do
   command "./configure && make && make install"
   user "root"
   cwd "/tmp/#{freetds_dir}"
-  not_if "test -f /usr/local/lib/libsybdb.so.5"
+  creates "/usr/local/lib/libsybdb.so.5"
+  notifies :run, resources(:execute => "ldconfig")
 end
 
 template freetds_conf do
   source "freetds.conf"
   owner "root"
   group "root"
-end
-
-execute "ldconfig" do
-  user "root"
 end
