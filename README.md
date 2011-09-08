@@ -42,5 +42,5 @@ I will be looking into more automated ways of checking cookbooks soonish.
 
 
 ---
-Copyright (c) 2011 - Finalist IT Group. Released under the [MIT License](LICENSE).
+Copyright (c) 2011 - Finalist IT Group. Released under the MIT License.
 Imported cookbooks from others have their own license.
