@@ -18,12 +18,14 @@ end
 execute "tar -xf #{freetds_tar}" do
   cwd "/tmp"
   user "root"
+  not_if "test -d #{freetds_dir}"
 end
 
 execute "compile freetds" do
   command "./configure && make && make install"
   user "root"
   cwd "/tmp/#{freetds_dir}"
+  not_if "test -f /usr/local/lib/libsybdb.so.5"
 end
 
 template freetds_conf do
