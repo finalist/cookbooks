@@ -35,6 +35,5 @@ template freetds_conf do
 end
 
 execute "ldconfig" do
-  command "ldconfig"
   user "root"
 end
