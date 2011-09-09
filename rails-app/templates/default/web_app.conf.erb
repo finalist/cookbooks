@@ -1,0 +1,46 @@
+<VirtualHost *:80>
+
+  ServerAdmin <%= node[:app][:server_admin] %>
+
+  ServerName <%= @params[:server_name] %>
+  ServerAlias <% @params[:server_aliases].each do |a| %><%= "#{a}" %> <% end %>
+
+  DocumentRoot <%= @params[:docroot] %>
+
+  RailsBaseURI /
+  RailsEnv <%= @params[:rails_env] %>
+
+  PassengerMinInstances 2
+  PassengerPreStart http://<%= @params[:server_name] %>
+
+  ExpiresActive On
+  XBitHack On
+
+  <Directory <%= @params[:docroot] %>>
+    Options FollowSymLinks Includes -Multiviews
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+  </Directory>
+
+  <FilesMatch "\.(ico|pdf|flv|jpe?g|png|gif|js|css|swf)$">
+    ExpiresActive On
+    ExpiresDefault "access plus 1 year"
+    Header unset ETag
+    FileETag None
+    Header unset Last-Modified
+  </FilesMatch>
+
+  LogLevel info
+  ErrorLog <%= node[:apache][:log_dir] %>/<%= @params[:name] %>-error.log
+  CustomLog <%= node[:apache][:log_dir] %>/<%= @params[:name] %>-access.log combined
+
+  RewriteEngine On
+  RewriteLog <%= node[:apache][:log_dir] %>/<%= @application_name %>-rewrite.log
+  RewriteLogLevel 0
+
+  RewriteCond %{DOCUMENT_ROOT}/system/maintenance.html -f
+  RewriteCond %{SCRIPT_FILENAME} !maintenance.html
+  RewriteRule ^.*$ /system/maintenance.html [L]
+
+</VirtualHost>

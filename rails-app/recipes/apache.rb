@@ -7,9 +7,9 @@ apache_site "000-default" do
   enable false
 end
 
-web_app app do
-  docroot "#{dir}/current/public"
-  rails_env config[:environment]
-  server_name "#{url_name}.#{node[:domain]}"
-  server_aliases [ "#{url_name}", node[:hostname] ]
+web_app node[:app][:name] do
+  docroot "#{node[:app][:dir]}/current/public"
+  rails_env node[:app][:environment]
+  server_name node[:app][:server_name]
+  server_aliases [ node[:app][:server_alias] ]
 end

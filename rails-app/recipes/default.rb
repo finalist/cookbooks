@@ -1,5 +1,4 @@
 config = node[:app]
-app = config[:name]
 dir = config[:dir]
 user_name = config[:user]
 group_name = config[:group]
@@ -11,19 +10,21 @@ user user_name do
   comment  "This user manages the application"
   shell    "/bin/bash"
   password config[:password]
-  home     "/home/#{user_name}"
+  home     config[:home_dir]
 end
 
-directory "/home/#{user_name}" do
+directory config[:home_dir] do
   owner user_name
   group group_name
   mode  "0755"
+  recursive true
 end
 
 directory "#{dir}/shared" do
   owner user_name
   group group_name
   mode  "0755"
+  recursive true
 end
 
 # we need a normal hash to convert to yaml
