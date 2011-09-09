@@ -9,7 +9,7 @@ user app do
   comment "This user manages the application"
   shell "/bin/bash"
   password config[:password]
-  home dir
+  home config[:home_dir]
 end
 
 directory dir do

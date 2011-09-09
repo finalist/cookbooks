@@ -1,9 +1,9 @@
 db = node[:app][:database]
 
-gem_package "mysql"
-
 include_recipe "mysql::server"
 include_recipe "mysql::client"
+
+gem_package "mysql"
 
 mysql_database "create database" do
   host "#{db[:host]}"
