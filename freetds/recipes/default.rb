@@ -34,6 +34,13 @@ execute "compile freetds" do
   notifies :run, resources(:execute => "ldconfig")
 end
 
+execute "fix permissions" do
+  command "chmod 644 #{freetds_conf}"
+  user "root"
+  cwd "/tmp/#{freetds_dir}"
+end
+
+
 template freetds_conf do
   source "freetds.conf"
   owner "root"
