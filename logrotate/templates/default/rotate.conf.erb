@@ -9,7 +9,7 @@
   create 640 finalist finalist
   sharedscripts
   postrotate
-    <%= "touch #{deploy_to}/current/tmp/restart.txt > /dev/null" %>
+    <%= "touch #{node[:deploy_to]}/current/tmp/restart.txt > /dev/null" %>
   endscript
 }
 <% end %>

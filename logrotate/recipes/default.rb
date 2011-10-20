@@ -5,11 +5,11 @@ service "logrotate" do
   action [ :enable, :start ]
 end
 
-template "/etc/logrotate.d/#{application_directory}.conf" do
+template "/etc/logrotate.d/#{node[:application_directory]}.conf" do
   notifies :reload, resources( :service => "logrotate" )
 end
 
-template "/etc/logrotate.d/#{application_directory}.conf" do
+template "/etc/logrotate.d/#{node[:application_directory]}.conf" do
   source 'rotate.conf'
   owner 'root'
   group 'root'
