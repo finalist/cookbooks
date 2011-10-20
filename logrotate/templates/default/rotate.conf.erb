@@ -1,0 +1,15 @@
+<% node[:lograte][:logs].each do |log| -%>
+<%= log %> {
+  monthly
+  missingok
+  rotate 36
+  compress
+  delaycompress
+  notifempty
+  create 640 finalist finalist
+  sharedscripts
+  postrotate
+    <%= "touch #{deploy_to}/current/tmp/restart.txt > /dev/null" %>
+  endscript
+}
+<% end %>
