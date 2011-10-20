@@ -1,6 +1,6 @@
 package "logrotate"
 
-template "/etc/logrotate.d/#{node[:application_directory]}.conf" do
+template "/etc/logrotate.d/#{node[:application]}.conf" do
   source 'rotate.conf.erb'
   owner 'root'
   group 'root'
