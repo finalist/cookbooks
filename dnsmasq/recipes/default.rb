@@ -6,7 +6,7 @@ service "dnsmasq" do
 end
 
 template "/etc/dnsmasq.conf" do
-  notifies :restart, resources( :service => "dnsmasq" )
+  notifies :restart, resources(:service => "dnsmasq"), :immediately
 end
 
 template "/etc/resolv.conf" do
