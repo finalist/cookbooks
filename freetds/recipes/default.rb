@@ -1,6 +1,6 @@
 require_recipe 'build-essential'
 
-freetds_url  = 'http://ibiblio.org/pub/Linux/ALPHA/freetds/stable/freetds-0.91.tar.gz'
+freetds_url  = 'http://mirrors.ibiblio.org/freetds/stable/freetds-0.91.tar.gz'
 freetds_tar  = 'freetds-0.91.tar.gz'
 freetds_dir  = 'freetds-0.91'
 freetds_conf = '/usr/local/etc/freetds.conf'
