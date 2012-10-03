@@ -11,7 +11,7 @@ available.
 
 To test out a cookbook, you can use [vagrant](http://vagrantup.com/).
 
-    gem install vagrant
+    go to http://downloads.vagrantup.com/ or gem install vagrant
     vagrant box add lucid32 http://files.vagrantup.com/lucid32.box
 
     export RECIPE=my_new_cookbook
