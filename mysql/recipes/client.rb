@@ -17,44 +17,43 @@
 # limitations under the License.
 #
 
-::Chef::Resource::Package.send(:include, Opscode::Mysql::Helpers)
+# Include Opscode helper in Recipe class to get access
+# to debian_before_squeeze? and ubuntu_before_lucid?
+::Chef::Recipe.send(:include, Opscode::Mysql::Helpers)
 
-package "mysql-client" do
-  package_name value_for_platform(
-    [ "centos", "redhat", "suse", "fedora"] => { "default" => "mysql" },
-    "default" => "mysql-client"
-  )
-  action :install
+case node['platform']
+when "windows"
+  package_file = node['mysql']['client']['package_file']
+  remote_file "#{Chef::Config[:file_cache_path]}/#{package_file}" do
+    source node['mysql']['client']['url']
+    not_if { File.exists? "#{Chef::Config[:file_cache_path]}/#{package_file}" }
+  end
+
+  windows_package node['mysql']['client']['packages'].first do
+    source "#{Chef::Config[:file_cache_path]}/#{package_file}"
+  end
+  windows_path node['mysql']['client']['bin_dir'] do
+    action :add
+  end
+  def package(*args, &blk)
+    windows_package(*args, &blk)
+  end
+when "mac_os_x"
+  include_recipe 'homebrew'
 end
 
-package "mysql-devel" do
-  package_name begin
-    if platform?(%w{ centos redhat suse fedora })
-      "mysql-devel"
-    elsif debian_before_squeeze? || ubuntu_before_lucid?
-      "libmysqlclient15-dev"
-    else
-      "libmysqlclient-dev"
+node['mysql']['client']['packages'].each do |mysql_pack|
+  package mysql_pack do
+    action :install
+  end
+end
+
+if platform? 'windows'
+  ruby_block "copy libmysql.dll into ruby path" do
+    block do
+      require 'fileutils'
+      FileUtils.cp "#{node['mysql']['client']['lib_dir']}\\libmysql.dll", node['mysql']['client']['ruby_dir']
     end
+    not_if { File.exist?("#{node['mysql']['client']['ruby_dir']}\\libmysql.dll") }
   end
-  action :install
-end
-
-if platform?(%w{ debian ubuntu redhat centos fedora suse })
-
-  package "mysql-ruby" do
-    package_name value_for_platform(
-      [ "centos", "redhat", "suse", "fedora"] => { "default" => "ruby-mysql" },
-      ["debian", "ubuntu"] => { "default" => 'libmysql-ruby' },
-      "default" => 'libmysql-ruby'
-    )
-    action :install
-  end
-
-else
-
-  gem_package "mysql" do
-    action :install
-  end
-
 end

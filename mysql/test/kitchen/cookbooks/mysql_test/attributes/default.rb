@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: mysql
-# Resource:: database
+# Cookbook Name:: mysql_test
+# Attributes:: default
 #
-# Copyright:: 2008-2011, Opscode, Inc <legal@opscode.com>
+# Copyright 2012, Opscode, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,11 +17,11 @@
 # limitations under the License.
 #
 
-actions :flush_tables_with_read_lock, :unflush_tables, :create_db, :query
+# Must be specified for chef-solo for successful re-converge
+override['mysql']['server_root_password'] = 'ebrilvOpCethHienRoj7'
 
-attribute :host, :kind_of => String
-attribute :username, :kind_of => String
-attribute :password, :kind_of => String
-attribute :database, :kind_of => String
-attribute :sql, :kind_of => String
-attribute :exists, :default => false
+default['mysql_test']['database'] = 'mysql_test'
+default['mysql_test']['username'] = 'test_user'
+default['mysql_test']['password'] = 'neshFiapog'
+
+override['mysql']['bind_address'] = 'localhost'
