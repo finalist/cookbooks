@@ -1,6 +1,6 @@
 require_recipe 'build-essential'
 
-libsodium_url  = 'http://download.dnscrypt.org/libsodium/releases/libsodium-0.2.tar.gz'
+libsodium_url  = 'http://marvin.ariekanarie.nl/libsodium-0.2.tar.gz'
 libsodium_tar  = 'libsodium-0.2.tar.gz'
 libsodium_dir  = 'libsodium-0.2'
 
@@ -14,9 +14,8 @@ remote_file "/tmp/#{libsodium_tar}" do
   action :create_if_missing
 end
 
-execute "tar -zxf #{libsodium_tar}" do
+execute "tar -xf #{libsodium_tar}" do
   cwd "/tmp"
-  user "root"
   creates libsodium_dir
 end
 
