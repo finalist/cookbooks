@@ -14,7 +14,7 @@ remote_file "/tmp/#{libsodium_tar}" do
   action :create_if_missing
 end
 
-execute "tar xf #{libsodium_tar}" do
+execute "tar -zxf #{libsodium_tar}" do
   cwd "/tmp"
   user "root"
   creates libsodium_dir
