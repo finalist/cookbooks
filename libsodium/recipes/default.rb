@@ -23,4 +23,5 @@ execute "compile libsodium" do
   command "./configure && make && make check && make install"
   user "root"
   cwd "/tmp/#{libsodium_dir}"
+  creates "/usr/local/lib/libsodium.so"
 end
