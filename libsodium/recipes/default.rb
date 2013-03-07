@@ -1,8 +1,9 @@
 require_recipe 'build-essential'
 
-libsodium_url  = 'http://marvin.ariekanarie.nl/libsodium-0.2.tar.gz'
-libsodium_tar  = 'libsodium-0.2.tar.gz'
-libsodium_dir  = 'libsodium-0.2'
+version = '0.3'
+libsodium_url  = "http://download.dnscrypt.org/libsodium/releases/libsodium-#{version}.tar.gz"
+libsodium_tar  = "libsodium-#{version}.tar.gz"
+libsodium_dir  = "libsodium-#{version}"
 
 package "wget" do
   action :install
