@@ -1,7 +1,7 @@
 require_recipe 'build-essential'
 
 version = '0.3'
-libsodium_url  = "http://download.dnscrypt.org/libsodium/releases/libsodium-#{version}.tar.gz"
+libsodium_url  = "http://marvin.ariekanarie.nl/libsodium-#{version}.tar.gz"
 libsodium_tar  = "libsodium-#{version}.tar.gz"
 libsodium_dir  = "libsodium-#{version}"
 
