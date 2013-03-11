@@ -1,0 +1,34 @@
+{
+  "name": "libyaml",
+  "description": "Installs/Configures libyaml",
+  "long_description": "# libyaml cookbook\n\nInstall libyaml from source.\n\n# Requirements\n\n# Usage\n\nJust include the default recipe and libyaml gets installed.\n\n# Attributes\n\n    default['libyaml']['url'] = 'http://pyyaml.org/download/libyaml'\n    default['libyaml']['version'] = '0.1.4'\n    default['libyaml']['checksum'] = '7bf81554ae5ab2d9b6977da398ea789722e0db75b86bffdaeb4e66d961de6a37'\n\n    default['libyaml']['configure_options'] = %w{\n                                                  --prefix=/usr/local\n                                                }\n\n# Recipes\n\n    libyaml::default\n\n# Author\n\nAuthor:: Cassiano Leal (cl@cassianoleal.com)\n",
+  "maintainer": "Cassiano Leal",
+  "maintainer_email": "cl@cassianoleal.com",
+  "license": "Apache 2.0",
+  "platforms": {
+    "debian": ">= 0.0.0",
+    "ubuntu": ">= 0.0.0"
+  },
+  "dependencies": {
+    "build-essential": ">= 0.0.0",
+    "apt": ">= 0.0.0"
+  },
+  "recommendations": {
+  },
+  "suggestions": {
+  },
+  "conflicting": {
+  },
+  "providing": {
+  },
+  "replacing": {
+  },
+  "attributes": {
+  },
+  "groupings": {
+  },
+  "recipes": {
+    "libyaml": "Installs libyaml from source"
+  },
+  "version": "0.1.0"
+}
