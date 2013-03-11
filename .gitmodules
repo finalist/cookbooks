@@ -13,3 +13,6 @@
 [submodule "passenger_apache2"]
 	path = passenger_apache2
 	url = git@github.com:opscode-cookbooks/passenger_apache2.git
+[submodule "rvm_passenger"]
+	path = rvm_passenger
+	url = git@github.com:fnichol/chef-rvm_passenger.git
