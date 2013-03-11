@@ -10,3 +10,6 @@
 [submodule "git"]
 	path = git
 	url = git@github.com:opscode-cookbooks/git.git
+[submodule "passenger_apache2"]
+	path = passenger_apache2
+	url = git@github.com:opscode-cookbooks/passenger_apache2.git
