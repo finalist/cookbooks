@@ -10,3 +10,6 @@
 [submodule "git"]
 	path = git
 	url = git@github.com:opscode-cookbooks/git.git
+[submodule "chef-ruby_build"]
+	path = chef-ruby_build
+	url = git@github.com:fnichol/chef-ruby_build.git
