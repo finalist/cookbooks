@@ -10,3 +10,6 @@
 [submodule "git"]
 	path = git
 	url = git@github.com:opscode-cookbooks/git.git
+[submodule "rvm"]
+	path = rvm
+	url = git@github.com:fnichol/chef-rvm.git
