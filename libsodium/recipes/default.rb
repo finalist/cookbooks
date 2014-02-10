@@ -4,6 +4,7 @@ version = '0.4.5'
 libsodium_url = "http://download.libsodium.org/libsodium/releases/libsodium-#{version}.tar.gz"
 libsodium_tar = "libsodium-#{version}.tar.gz"
 libsodium_dir = "libsodium-#{version}"
+libsodium_lib = "/usr/local/lib/libsodium.so"
 
 package "wget" do
   action :install
@@ -24,5 +25,7 @@ execute "compile libsodium" do
   command "./configure && make && make check && make install"
   user "root"
   cwd "/tmp/#{libsodium_dir}"
-  creates "/usr/local/lib/libsodium.so"
+  not_if do
+    File.exists?(libsodium_lib) && File.readlink(libsodium_lib).include?("4.5")
+  end
 end
