@@ -1,3 +1,4 @@
+name              "libsodium"
 maintainer        "Finalist"
 maintainer_email  "service@finalist.nl"
 license           "MIT"
